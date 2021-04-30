@@ -131,7 +131,7 @@ class Share {
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
     ArrayList<String> multiText = new ArrayList<>(paths.size()+1);
-    multiText.add(text);
+    multiText.add(paths.size(), text);
 
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
@@ -185,13 +185,12 @@ class Share {
   }
 
   private ArrayList<Uri> getUrisForPaths(List<String> paths) throws IOException {
-    ArrayList<Uri> uris = new ArrayList<>(paths.size()+1);
+    ArrayList<Uri> uris = new ArrayList<>(paths.size());
     for (String path : paths) {
       File file = new File(path);
       if (!fileIsOnExternal(file)) {
         file = copyToExternalShareFolder(file);
       }
-      uris.add();
       uris.add(
           FileProvider.getUriForFile(
               getContext(), getContext().getPackageName() + ".flutter.share_provider", file));
