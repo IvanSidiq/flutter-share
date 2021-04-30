@@ -114,8 +114,8 @@ class Share {
     shareIntent.setAction(Intent.ACTION_SEND);
     shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-    sendIntent.putExtra("jid", waNumber + "@s.whatsapp.net"); //phone number without "+" prefix
-    sendIntent.setPackage("com.whatsapp");
+    shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
+    shareIntent.setPackage("com.whatsapp");
     shareIntent.setType("text/plain");
     Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
     startActivity(chooserIntent);

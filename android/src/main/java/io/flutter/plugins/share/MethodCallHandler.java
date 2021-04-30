@@ -48,8 +48,8 @@ class MethodCallHandler implements MethodChannel.MethodCallHandler {
       case "shareWa":
         expectMapArguments(call);
         // Android does not support showing the share sheet at a particular point on screen.
-        String text = call.argument("text");
-        String subject = call.argument("subject");
+        text = call.argument("text");
+        subject = call.argument("subject");
         String waNumber = call.argument("waNumber");
         share.shareWa(text, subject, waNumber);
         result.success(null);
@@ -57,8 +57,8 @@ class MethodCallHandler implements MethodChannel.MethodCallHandler {
       case "shareFilesWa":
         expectMapArguments(call);
 
-        List<String> paths = call.argument("paths");
-        List<String> mimeTypes = call.argument("mimeTypes");
+        paths = call.argument("paths");
+        mimeTypes = call.argument("mimeTypes");
         text = call.argument("text");
         subject = call.argument("subject");
         waNumber = call.argument("waNumber");
