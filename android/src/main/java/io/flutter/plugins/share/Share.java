@@ -115,7 +115,7 @@ class Share {
     shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
     shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
-    shareIntent.setPackage("com.whatsapp");
+    shareIntent.setPackage("com.whatssapp");
     shareIntent.setType("text/plain");
     Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
     startActivity(chooserIntent);
@@ -148,7 +148,6 @@ class Share {
       shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
       shareIntent.setType(reduceMimeTypes(mimeTypes));
     }
-    
     if (subject != null) shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
     if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
     shareIntent.setPackage("com.whatsapp");
