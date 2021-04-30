@@ -154,7 +154,7 @@ class Share {
     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
     //Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
 
-    List<ResolveInfo> resInfoList =
+    /*List<ResolveInfo> resInfoList =
         getContext()
             .getPackageManager()
             .queryIntentActivities(chooserIntent, PackageManager.MATCH_DEFAULT_ONLY);
@@ -167,7 +167,7 @@ class Share {
                 fileUri,
                 Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
       }
-    }
+    }*/
 
     startActivity(shareIntent);
   }
