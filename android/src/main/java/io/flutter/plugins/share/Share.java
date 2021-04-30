@@ -115,10 +115,10 @@ class Share {
     shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
     shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
-    shareIntent.setPackage("com.whatssapp");
+    shareIntent.setPackage("com.whatsapp");
     shareIntent.setType("text/plain");
-    Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
-    startActivity(chooserIntent);
+    //Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
+    startActivity(shareIntent);
   }
 
   void shareFilesWa(List<String> paths, List<String> mimeTypes, String text, String subject, String waNumber)
@@ -152,7 +152,7 @@ class Share {
     if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
     shareIntent.setPackage("com.whatsapp");
     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-    Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
+    //Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
 
     List<ResolveInfo> resInfoList =
         getContext()
@@ -169,7 +169,7 @@ class Share {
       }
     }
 
-    startActivity(chooserIntent);
+    startActivity(shareIntent);
   }
 
   private void startActivity(Intent intent) {
