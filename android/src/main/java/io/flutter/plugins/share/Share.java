@@ -105,15 +105,15 @@ class Share {
     startActivity(chooserIntent);
   }
 
-  void shareWa(String text, String waNumber) {
+  void shareWa(String text, String subject, String waNumber) {
     if (text == null || text.isEmpty()) {
       throw new IllegalArgumentException("Non-empty text expected");
     }
 
     Intent shareIntent = new Intent();
-    Uri uri = Uri.parse("smsto:" + waNumber);
-    shareIntent.setAction(Intent.ACTION_SENDTO, uri);
-    shareIntent.putExtra("sms_body", text);
+    shareIntent.setAction(Intent.ACTION_SEND);
+    shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+    shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
     shareIntent.setPackage("com.whatsapp");
     shareIntent.setType("text/plain");
     
@@ -134,7 +134,7 @@ class Share {
 
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
-      shareWa(text, waNumber);
+      shareWa(text, subject, waNumber);
       return;
     } else if (fileUris.size() == 1) {
       shareIntent.setAction(Intent.ACTION_SEND);
