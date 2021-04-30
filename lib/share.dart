@@ -94,6 +94,73 @@ class Share {
     return channel.invokeMethod('shareFiles', params);
   }
 
+  static Future<void> shareWa(
+    String text, {
+    String? subject,
+    String? waNumber,
+    Rect? sharePositionOrigin,
+  }) {
+    assert(text != null);
+    assert(text.isNotEmpty);
+    final Map<String, dynamic> params = <String, dynamic>{
+      'text': text,
+      'waNumber': waNumber,
+      'subject': subject,
+    };
+
+    if (sharePositionOrigin != null) {
+      params['originX'] = sharePositionOrigin.left;
+      params['originY'] = sharePositionOrigin.top;
+      params['originWidth'] = sharePositionOrigin.width;
+      params['originHeight'] = sharePositionOrigin.height;
+    }
+
+    return channel.invokeMethod<void>('share', params);
+  }
+
+  /// Summons the platform's share sheet to share multiple files.
+  ///
+  /// Wraps the platform's native share dialog. Can share a file.
+  /// It uses the `ACTION_SEND` Intent on Android and `UIActivityViewController`
+  /// on iOS.
+  ///
+  /// The optional `sharePositionOrigin` parameter can be used to specify a global
+  /// origin rect for the share sheet to popover from on iPads. It has no effect
+  /// on non-iPads.
+  ///
+  /// May throw [PlatformException] or [FormatException]
+  /// from [MethodChannel].
+  static Future<void> shareFilesWa(
+    List<String> paths, {
+    List<String>? mimeTypes,
+    String? subject,
+    String? text,
+    String? waNumber,
+    Rect? sharePositionOrigin,
+  }) {
+    assert(paths != null);
+    assert(paths.isNotEmpty);
+    assert(paths.every((element) => element != null && element.isNotEmpty));
+    final Map<String, dynamic> params = <String, dynamic>{
+      'paths': paths,
+      'mimeTypes': mimeTypes ??
+          paths.map((String path) => _mimeTypeForPath(path)).toList(),
+    };
+
+    if (subject != null) params['subject'] = subject;
+    if (text != null) params['text'] = text;
+    if (waNumber != null) params['waNumber'] = waNumber;
+
+    if (sharePositionOrigin != null) {
+      params['originX'] = sharePositionOrigin.left;
+      params['originY'] = sharePositionOrigin.top;
+      params['originWidth'] = sharePositionOrigin.width;
+      params['originHeight'] = sharePositionOrigin.height;
+    }
+
+    return channel.invokeMethod('shareFiles', params);
+  }
+
   static String _mimeTypeForPath(String path) {
     assert(path != null);
     return lookupMimeType(path) ?? 'application/octet-stream';
