@@ -51,7 +51,7 @@ class MethodCallHandler implements MethodChannel.MethodCallHandler {
         String text = call.argument("text");
         String subject = call.argument("subject");
         String waNumber = call.argument("waNumber");
-        share.share(text, subject, waNumber);
+        share.shareWa(text, subject, waNumber);
         result.success(null);
         break;
       case "shareFilesWa":
@@ -64,7 +64,7 @@ class MethodCallHandler implements MethodChannel.MethodCallHandler {
         waNumber = call.argument("waNumber");
         // Android does not support showing the share sheet at a particular point on screen.
         try {
-          share.shareFiles(paths, mimeTypes, text, subject, waNumber);
+          share.shareFilesWa(paths, mimeTypes, text, subject, waNumber);
           result.success(null);
         } catch (IOException e) {
           result.error(e.getMessage(), null, null);
