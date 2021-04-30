@@ -131,7 +131,7 @@ class Share {
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
     ArrayList<String> multiText = new ArrayList<>(paths.size());
-    multiText.add(multiText.size()-1, text);
+    multiText.add(paths.size()-1, text);
 
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
