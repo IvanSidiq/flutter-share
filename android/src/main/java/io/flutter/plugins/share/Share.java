@@ -129,6 +129,8 @@ class Share {
 
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
+    ArrayList<String> multiText = new ArrayList<String>();
+    multiText.add(text);
 
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
@@ -137,14 +139,16 @@ class Share {
     } else if (fileUris.size() == 1) {
       shareIntent.setAction(Intent.ACTION_SEND);
       shareIntent.putExtra(Intent.EXTRA_STREAM, fileUris.get(0));
+      if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, text);
       shareIntent.setType(
           !mimeTypes.isEmpty() && mimeTypes.get(0) != null ? mimeTypes.get(0) : "*/*");
     } else {
       shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
       shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
+      if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, multiText);
       shareIntent.setType(reduceMimeTypes(mimeTypes));
     }
-    if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+    
     if (subject != null) shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
     if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
     shareIntent.setPackage("com.whatsapp");
