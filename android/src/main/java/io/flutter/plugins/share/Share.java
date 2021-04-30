@@ -129,7 +129,7 @@ class Share {
 
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
-    ArrayList<String> multiText = new ArrayList<String>();
+    ArrayList<String> multiText = new ArrayList<>(paths.size());
     multiText.add(text);
 
     Intent shareIntent = new Intent();
@@ -144,8 +144,8 @@ class Share {
           !mimeTypes.isEmpty() && mimeTypes.get(0) != null ? mimeTypes.get(0) : "*/*");
     } else {
       shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+      if (text != null) shareIntent.putParcelableArrayListExtra(Intent.EXTRA_TEXT, multiText);
       shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
-      if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, multiText);
       shareIntent.setType(reduceMimeTypes(mimeTypes));
     }
     
@@ -191,7 +191,6 @@ class Share {
       if (!fileIsOnExternal(file)) {
         file = copyToExternalShareFolder(file);
       }
-
       uris.add(
           FileProvider.getUriForFile(
               getContext(), getContext().getPackageName() + ".flutter.share_provider", file));
