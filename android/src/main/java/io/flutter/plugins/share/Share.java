@@ -144,7 +144,7 @@ class Share {
           !mimeTypes.isEmpty() && mimeTypes.get(0) != null ? mimeTypes.get(0) : "*/*");
     } else {
       shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-      if (text != null) shareIntent.putParcelableArrayListExtra(Intent.EXTRA_TEXT, multiText);
+      if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, multiText);
       shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
       shareIntent.setType(reduceMimeTypes(mimeTypes));
     }
