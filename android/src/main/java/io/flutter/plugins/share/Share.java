@@ -114,10 +114,6 @@ class Share {
     shareIntent.setAction(Intent.ACTION_SEND);
     shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-    shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
-    PackageInfo info=pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
-        //Check if package exists or not. If not then code 
-        //in catch block will be called
     shareIntent.setPackage("com.whatsapp");
     shareIntent.setType("text/plain");
     
