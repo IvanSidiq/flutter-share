@@ -146,6 +146,8 @@ class Share {
     }
     if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     if (subject != null) shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+    if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
+    shareIntent.setPackage("com.whatsapp");
     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
     Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
 
