@@ -130,8 +130,8 @@ class Share {
 
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
-    ArrayList<String> multiText = new ArrayList<>(paths.size()+1);
-    multiText.add(paths.size(), text);
+    ArrayList<String> multiText = new ArrayList<>(paths.size());
+    multiText.add(text);
 
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
@@ -144,8 +144,9 @@ class Share {
       shareIntent.setType(
           !mimeTypes.isEmpty() && mimeTypes.get(0) != null ? mimeTypes.get(0) : "*/*");
     } else {
+      shareWa(text, subject, waNumber);
       shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-      if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, multiText);
+      //if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, multiText);
       shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
       shareIntent.setType(reduceMimeTypes(mimeTypes));
     }
