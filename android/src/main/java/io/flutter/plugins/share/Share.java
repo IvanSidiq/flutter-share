@@ -114,6 +114,7 @@ class Share {
     shareIntent.setAction(Intent.ACTION_SEND);
     shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+    shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
     shareIntent.setPackage("com.whatsapp");
     shareIntent.setType("text/plain");
     

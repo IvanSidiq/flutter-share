@@ -115,7 +115,7 @@ class Share {
       params['originHeight'] = sharePositionOrigin.height;
     }
 
-    return channel.invokeMethod<void>('share', params);
+    return channel.invokeMethod<void>('shareWa', params);
   }
 
   /// Summons the platform's share sheet to share multiple files.
@@ -158,7 +158,7 @@ class Share {
       params['originHeight'] = sharePositionOrigin.height;
     }
 
-    return channel.invokeMethod('shareFiles', params);
+    return channel.invokeMethod('shareFilesWa', params);
   }
 
   static String _mimeTypeForPath(String path) {
