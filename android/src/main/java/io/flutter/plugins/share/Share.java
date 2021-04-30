@@ -115,10 +115,14 @@ class Share {
     shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
     shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
+    PackageInfo info=pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
+        //Check if package exists or not. If not then code 
+        //in catch block will be called
     shareIntent.setPackage("com.whatsapp");
     shareIntent.setType("text/plain");
-    //Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
-    startActivity(shareIntent);
+    
+    Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
+    startActivity(chooserIntent);
   }
 
   void shareFilesWa(List<String> paths, List<String> mimeTypes, String text, String subject, String waNumber)
@@ -152,9 +156,9 @@ class Share {
     if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
     shareIntent.setPackage("com.whatsapp");
     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-    //Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
+    Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
 
-    /*List<ResolveInfo> resInfoList =
+    List<ResolveInfo> resInfoList =
         getContext()
             .getPackageManager()
             .queryIntentActivities(chooserIntent, PackageManager.MATCH_DEFAULT_ONLY);
@@ -167,9 +171,9 @@ class Share {
                 fileUri,
                 Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
       }
-    }*/
+    }
 
-    startActivity(shareIntent);
+    startActivity(chooserIntent);
   }
 
   private void startActivity(Intent intent) {
