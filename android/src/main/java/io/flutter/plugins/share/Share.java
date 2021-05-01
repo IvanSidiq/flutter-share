@@ -131,6 +131,7 @@ class Share {
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
     ArrayList<String> texts = new ArrayList<>();
+    texts.add(text);
     for (int i=0; i<fileUris.size();i++){
       texts.add("$i");
     }
