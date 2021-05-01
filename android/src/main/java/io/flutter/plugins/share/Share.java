@@ -130,6 +130,10 @@ class Share {
 
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
+    ArrayList<String> texts = new ArrayList<>(paths.size());
+    if (int x = 0; x < paths.size(); x++){
+      texts.add("text");
+    }
 
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
@@ -138,6 +142,7 @@ class Share {
     } else if (fileUris.size() == 1) {
       shareIntent.setAction(Intent.ACTION_SEND);
       shareIntent.putExtra(Intent.EXTRA_STREAM, fileUris.get(0));
+      if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, text);
       if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
       shareIntent.setPackage("com.whatsapp");
       shareIntent.setType(
@@ -145,11 +150,12 @@ class Share {
     } else {
       shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
       shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
+      if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, texts);
       if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
       shareIntent.setPackage("com.whatsapp");
       shareIntent.setType(reduceMimeTypes(mimeTypes));
     }
-    if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+    
     if (subject != null) shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
     
     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
