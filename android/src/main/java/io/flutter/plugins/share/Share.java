@@ -133,7 +133,7 @@ class Share {
 
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
-      shareWa(text, subject);
+      shareWa(text, subject, waNumber);
       return;
     } else if (fileUris.size() == 1) {
       shareIntent.setAction(Intent.ACTION_SEND);
