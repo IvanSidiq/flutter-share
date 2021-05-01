@@ -135,11 +135,10 @@ class Share {
       if (i == paths.size()-1){
         multiText.add(i, text);
       } else {
-        multiText.add(i, '');
+        multiText.add(i, " ");
       }
     }
     
-
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
       shareWa(text, subject, waNumber);
