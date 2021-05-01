@@ -130,9 +130,8 @@ class Share {
 
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
-    ArrayList<String> texts = new ArrayList<>();
-    texts.add(text);
-    for (int i=0; i<fileUris.size();i++){
+    ArrayList<String> texts = new ArrayList<>(paths.size());
+    for (int i=0; i<paths.size();i++){
       texts.add("$i");
     }
 
@@ -151,7 +150,7 @@ class Share {
     } else {
       shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
       shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
-      if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, texts);
+      if (texts != null) shareIntent.putExtra(Intent.EXTRA_TEXT, texts);
       if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
       shareIntent.setPackage("com.whatsapp");
       shareIntent.setType(reduceMimeTypes(mimeTypes));
