@@ -132,11 +132,8 @@ class Share {
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
     ArrayList<String> multiText = new ArrayList<>(paths.size());
     for(int i=0; i<paths.size(); i++){
-      if (i == paths.size()-1){
-        multiText.add(i, text);
-      } else {
-        multiText.add(i, " ");
-      }
+      multiText.add(i, text);
+      
     }
     
     Intent shareIntent = new Intent();
