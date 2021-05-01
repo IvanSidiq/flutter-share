@@ -131,7 +131,7 @@ class Share {
     clearExternalShareFolder();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
     ArrayList<String> multiText = new ArrayList<>(paths.size());
-    for(int i=1; i<paths.size(); i++){
+    for(int i=0; i<paths.size(); i++){
       if (i == paths.size()-1){
         multiText.add(i, text);
       } else {
