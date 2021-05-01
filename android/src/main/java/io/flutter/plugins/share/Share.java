@@ -133,22 +133,25 @@ class Share {
 
     Intent shareIntent = new Intent();
     if (fileUris.isEmpty()) {
-      share(text, subject);
+      shareWa(text, subject);
       return;
     } else if (fileUris.size() == 1) {
       shareIntent.setAction(Intent.ACTION_SEND);
       shareIntent.putExtra(Intent.EXTRA_STREAM, fileUris.get(0));
+      if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
+      shareIntent.setPackage("com.whatsapp");
       shareIntent.setType(
           !mimeTypes.isEmpty() && mimeTypes.get(0) != null ? mimeTypes.get(0) : "*/*");
     } else {
       shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
       shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
+      if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
+      shareIntent.setPackage("com.whatsapp");
       shareIntent.setType(reduceMimeTypes(mimeTypes));
     }
     if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     if (subject != null) shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-    if (waNumber != null) shareIntent.putExtra("jid", waNumber + "@s.whatsapp.net");
-    shareIntent.setPackage("com.whatsapp");
+    
     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
     Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
 
