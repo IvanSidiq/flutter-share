@@ -132,7 +132,7 @@ class Share {
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
     ArrayList<String> texts = new ArrayList<>(paths.size());
     for (int i=0; i<paths.size();i++){
-      texts.add("text");
+      texts.add("$i");
     }
 
     Intent shareIntent = new Intent();
